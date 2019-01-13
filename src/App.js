@@ -3,15 +3,28 @@ import './App.css';
 import ControlPanel from "components/ControlPanel/ControlPanel";
 import { controlPanelEntity } from "entities/controlPanel";
 import DaysList from "components/DaysList/DaysList";
+import { PlanItemCollectionMobx, PlanItemMobx  } from "entities/planItems";
+import PlanItemsData from "startData/planItems";
 
 let ControlPanelParams = new controlPanelEntity();
+let PlanItemsCollection = new PlanItemCollectionMobx();
+
+
 
 class App extends Component {
+
+    componentWillMount() {
+        PlanItemsData.itemsId.forEach((item, index) => {
+            PlanItemsCollection.addItem(PlanItemsData.items[item], item);
+        })
+    }
+
   render() {
+        console.log(PlanItemsCollection);
     return (
       <div className="App">
           <ControlPanel filterParams={ControlPanelParams}/>
-          <DaysList startDate={new Date(Date.now())} daysCount={ControlPanelParams.days} />
+          <DaysList planItemsIds={PlanItemsCollection.itemIds} planItems={PlanItemsCollection.items} startDate={new Date(Date.now())} daysCount={ControlPanelParams.days} />
       </div>
     );
   }
