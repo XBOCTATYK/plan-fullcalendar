@@ -6,6 +6,7 @@ import DaysList from "components/DaysList/DaysList";
 import { PlanItemCollectionMobx, PlanItemMobx  } from "entities/planItems";
 import PlanItemsData from "startData/planItems";
 import { getMonday } from "services/helper";
+import ModalWindow from "components/ModalWindow/ModalWindow";
 
 let ControlPanelParams = new controlPanelEntity();
 let PlanItemsCollection = new PlanItemCollectionMobx();
@@ -25,7 +26,14 @@ class App extends Component {
     return (
       <div className="App">
           <ControlPanel filterParams={ControlPanelParams}/>
-          <DaysList planItemsIds={PlanItemsCollection.itemIds} planItems={PlanItemsCollection.items} startDate={getMonday(new Date(Date.now()))} daysCount={ControlPanelParams.days} />
+          <DaysList
+              planItemsIds={PlanItemsCollection.itemIds}
+              planItems={PlanItemsCollection.items}
+              startDate={getMonday(new Date(Date.now()))}
+              daysCount={ControlPanelParams.days} />
+          <ModalWindow>
+              
+          </ModalWindow>
       </div>
     );
   }
