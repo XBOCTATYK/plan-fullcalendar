@@ -7,10 +7,14 @@ import { PlanItemCollectionMobx, PlanItemMobx  } from "entities/planItems";
 import PlanItemsData from "startData/planItems";
 import { getMonday } from "services/helper";
 import ModalWindow from "components/ModalWindow/ModalWindow";
+import { ModalItemEntity } from 'entities/ui';
+import CreatePlanItem from 'components/Forms/CreatePlanItem/CreatePlanItem';
 
 let ControlPanelParams = new controlPanelEntity();
 let PlanItemsCollection = new PlanItemCollectionMobx();
+let ModalStatus = new ModalItemEntity();
 
+export let appUi = React.createContext({modal: ModalStatus});
 
 
 class App extends Component {
@@ -26,13 +30,15 @@ class App extends Component {
     return (
       <div className="App">
           <ControlPanel filterParams={ControlPanelParams}/>
-          <DaysList
-              planItemsIds={PlanItemsCollection.itemIds}
-              planItems={PlanItemsCollection.items}
-              startDate={getMonday(new Date(Date.now()))}
-              daysCount={ControlPanelParams.days} />
-          <ModalWindow>
-              
+              <appUi.Provider value={{modal: ModalStatus}}>
+                  <DaysList
+                      planItemsIds={PlanItemsCollection.itemIds}
+                      planItems={PlanItemsCollection.items}
+                      startDate={getMonday(new Date(Date.now()))}
+                      daysCount={ControlPanelParams.days} />
+              </appUi.Provider>
+          <ModalWindow status={ModalStatus}>
+              <CreatePlanItem/>
           </ModalWindow>
       </div>
     );
