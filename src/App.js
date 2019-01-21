@@ -9,15 +9,18 @@ import { getMonday } from "services/helper";
 import ModalWindow from "components/ModalWindow/ModalWindow";
 import { ModalItemEntity } from 'entities/ui';
 import CreatePlanItem from 'components/Forms/CreatePlanItem/CreatePlanItem';
+import appParams from 'startData/app.json';
+import { observer } from "mobx-react";
 
 let ControlPanelParams = new controlPanelEntity();
 let PlanItemsCollection = new PlanItemCollectionMobx();
 let ModalStatus = new ModalItemEntity();
 
+ModalStatus.setParams(appParams);
+
 export let appUi = React.createContext({modal: ModalStatus});
 
-
-class App extends Component {
+const App = observer(class AppClass extends Component {
 
     componentWillMount() {
         PlanItemsData.itemsId.forEach((item, index) => {
@@ -38,11 +41,15 @@ class App extends Component {
                       daysCount={ControlPanelParams.days} />
               </appUi.Provider>
           <ModalWindow status={ModalStatus}>
-              <CreatePlanItem/>
+              <CreatePlanItem
+                  planItemsCollection={PlanItemsCollection}
+                  cancel={() => {ModalStatus.makeInvisible()}}
+                  params={ModalStatus.params}
+              />
           </ModalWindow>
       </div>
     );
   }
-}
+});
 
 export default App;
