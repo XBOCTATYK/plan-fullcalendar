@@ -12,6 +12,7 @@ import CreatePlanItem from 'components/Forms/CreatePlanItem/CreatePlanItem';
 import appParams from 'startData/app.json';
 import { observer } from "mobx-react";
 
+
 let ControlPanelParams = new controlPanelEntity();
 let PlanItemsCollection = new PlanItemCollectionMobx();
 let ModalStatus = new ModalItemEntity();
@@ -19,6 +20,7 @@ let ModalStatus = new ModalItemEntity();
 ModalStatus.setParams(appParams);
 
 export let appUi = React.createContext({modal: ModalStatus});
+
 
 const App = observer(class AppClass extends Component {
 
@@ -37,7 +39,6 @@ const App = observer(class AppClass extends Component {
                   <DaysList
                       planItemsIds={PlanItemsCollection.itemIds}
                       planItems={PlanItemsCollection.items}
-                      startDate={getMonday(new Date(Date.now()))}
                       daysCount={ControlPanelParams.days} />
               </appUi.Provider>
           <ModalWindow status={ModalStatus}>
