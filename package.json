@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.8.2",
+    "@material-ui/lab": "^3.0.0-alpha.29",
     "formik": "^1.4.2",
     "mobx": "^5.8.0",
     "mobx-react": "^5.4.3",
