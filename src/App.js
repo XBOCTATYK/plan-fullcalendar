@@ -3,14 +3,15 @@ import './App.css';
 import ControlPanel from "components/ControlPanel/ControlPanel";
 import { controlPanelEntity } from "entities/controlPanel";
 import DaysList from "components/DaysList/DaysList";
-import { PlanItemCollectionMobx, PlanItemMobx  } from "entities/planItems";
-import PlanItemsData from "startData/planItems";
+import { PlanItemCollectionMobx } from "entities/planItems";
 import { getMonday } from "services/helper";
 import ModalWindow from "components/ModalWindow/ModalWindow";
 import { ModalItemEntity } from 'entities/ui';
 import CreatePlanItem from 'components/Forms/CreatePlanItem/CreatePlanItem';
 import appParams from 'startData/app.json';
 import { observer } from "mobx-react";
+import GetData from 'services/GetData';
+import ByJSON from 'dataSource/ByJSON';
 
 
 let ControlPanelParams = new controlPanelEntity();
@@ -25,9 +26,17 @@ export let appUi = React.createContext({modal: ModalStatus});
 const App = observer(class AppClass extends Component {
 
     componentWillMount() {
-        PlanItemsData.itemsId.forEach((item, index) => {
-            PlanItemsCollection.addItem(PlanItemsData.items[item], item);
-        })
+
+        let DataSource = new ByJSON('planItems');
+        let FetchData = new GetData(DataSource);
+
+        FetchData.get().then((result) => {
+            result.itemsId.forEach((item, index) => {
+                PlanItemsCollection.addItem(result.items[item], item);
+            })
+        });
+
+
     }
 
   render() {
