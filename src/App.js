@@ -31,7 +31,7 @@ const App = observer(class AppClass extends Component {
         let FetchData = new GetData(DataSource);
 
         FetchData.get().then((result) => {
-            result.itemsId.forEach((item, index) => {
+            result.itemsId.forEach((item) => {
                 PlanItemsCollection.addItem(result.items[item], item);
             })
         });
@@ -40,7 +40,6 @@ const App = observer(class AppClass extends Component {
     }
 
   render() {
-        console.log(PlanItemsCollection);
     return (
       <div className="App">
           <ControlPanel filterParams={ControlPanelParams}/>
