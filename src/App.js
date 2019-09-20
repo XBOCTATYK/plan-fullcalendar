@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import ControlPanel from "components/ControlPanel/ControlPanel";
 import { controlPanelEntity } from "entities/controlPanel";
-import DaysList from "components/DaysList/DaysList";
+import CalendarController from "components/CalendarController/CalendarController";
 import { PlanItemCollectionMobx } from "entities/planItems";
 import { getMonday } from "services/helper";
 import ModalWindow from "components/ModalWindow/ModalWindow";
@@ -64,10 +64,13 @@ const App = observer(class AppClass extends Component {
       <div className="App">
           <ControlPanel filterParams={ControlPanelParams}/>
               <appUi.Provider value={{modal: ModalStatus}}>
-                  <DaysList
-                      lol={this.state.lol}
+                  <CalendarController
                       planItems={this.state.items}
-                      daysCount={ControlPanelParams.days} />
+                      daysCount={ControlPanelParams.days}
+                      addControl={(calendar) => <div/>}
+                      removeControl={(calendar) => <div/>}
+                      editControl={(calendar) => <div/>}
+                  />
               </appUi.Provider>
           <ModalWindow status={ModalStatus}>
               <CreatePlanItem
