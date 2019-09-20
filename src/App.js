@@ -31,13 +31,33 @@ const App = observer(class AppClass extends Component {
         let FetchData = new GetData(DataSource);
 
         FetchData.get().then((result) => {
-            result.itemsId.forEach((item) => {
-                PlanItemsCollection.addItem(result.items[item], item);
+            this.setState({items: result.items}, () => {
+                const stateItems = this.state.items;
+                stateItems[0].start = '2019-09-18 10:30:00';
+                stateItems[0].title = 'Изменилось!';
+                stateItems.push({
+                    "id": 6,
+                    "userId": 55,
+                    "title": "iss23440 : Запилить крутой сайт за 2 часа",
+                    "start": "2019-09-19 12:00:00",
+                    "end": "2019-09-19 12:30:00",
+                    "timeChecked": 0,
+                    "zone": "productive",
+                    "taskId": 23443,
+                    "date": "17.09.2019",
+                    "projectName": "onlineconvertfree.com"
+                });
+                setTimeout(() => {
+                    this.setState({items: stateItems, lol: 'fdf'})
+                }, 2000)
+
             })
         });
-
-
     }
+
+    state = {
+        items: []
+    };
 
   render() {
     return (
@@ -45,8 +65,8 @@ const App = observer(class AppClass extends Component {
           <ControlPanel filterParams={ControlPanelParams}/>
               <appUi.Provider value={{modal: ModalStatus}}>
                   <DaysList
-                      planItemsIds={PlanItemsCollection.itemIds}
-                      planItems={PlanItemsCollection.items}
+                      lol={this.state.lol}
+                      planItems={this.state.items}
                       daysCount={ControlPanelParams.days} />
               </appUi.Provider>
           <ModalWindow status={ModalStatus}>
