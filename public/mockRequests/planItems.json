@@ -1,0 +1,71 @@
+{
+    "status": true,
+    "items": [
+        {
+            "id": 1,
+            "userId": 55,
+            "title": "iss23440 : Запилить крутой сайт за 2 часа",
+            "start": "2019-09-18 10:00:00",
+            "end": "2019-09-18 11:00:00",
+            "timeChecked": 45,
+            "zone": "productive",
+            "taskId": 23440,
+            "projectName": "onlineconvertfree.com"
+        },
+        {
+            "id": 2,
+            "userId": 55,
+            "title": "iss23440 : Запилить крутой сайт за 2 часа",
+            "start": "2019-09-16 10:00:00",
+            "end": "2019-09-16 12:00:00",
+            "timeChecked": 15,
+            "zone": "productive",
+            "taskId": 23441,
+            "date": "16.09.2019",
+            "projectName": "onlineconvertfree.com"
+        },
+        {
+            "id": 3,
+            "userId": 55,
+            "title": "iss23440 : Запилить крутой сайт за 2 часа",
+			"start": "2019-09-17 10:00:00",
+			"end": "2019-09-17 10:15:00",
+            "timeChecked": 15,
+            "zone": "productive",
+            "taskId": 23442,
+            "date": "17.09.2019",
+            "projectName": "onlineconvertfree.com"
+        },
+        {
+            "id": 4,
+            "userId": 55,
+            "title": "iss23440 : Запилить крутой сайт за 2 часа",
+			"start": "2019-09-17 10:15:00",
+			"end": "2019-09-17 14:00:00",
+            "timeChecked": 15,
+            "zone": "productive",
+            "taskId": 23443,
+            "date": "18.09.2019",
+            "projectName": "onlineconvertfree.com"
+        },
+        {
+            "id": 5,
+            "userId": 55,
+            "title": "iss23440 : Запилить крутой сайт за 2 часа",
+			"start": "2019-09-19 10:00:00",
+			"end": "2019-09-19 12:00:00",
+            "timeChecked": 0,
+            "zone": "productive",
+            "taskId": 23443,
+            "date": "17.09.2019",
+            "projectName": "onlineconvertfree.com"
+        }
+    ],
+    "itemsId": [
+        1,
+        2,
+        3,
+        4,
+        5
+    ]
+}
