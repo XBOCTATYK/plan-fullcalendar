@@ -12,6 +12,7 @@ import appParams from 'startData/app.json';
 import { observer } from "mobx-react";
 import GetData from 'services/GetData';
 import ByJSON from 'dataSource/ByJSON';
+import {CalendarApiDistributor} from 'entities/calendarApiDistributor';
 
 
 let ControlPanelParams = new controlPanelEntity();
@@ -31,32 +32,13 @@ const App = observer(class AppClass extends Component {
         let FetchData = new GetData(DataSource);
 
         FetchData.get().then((result) => {
-            this.setState({items: result.items}, () => {
-                const stateItems = this.state.items;
-                stateItems[0].start = '2019-09-18 10:30:00';
-                stateItems[0].title = 'Изменилось!';
-                stateItems.push({
-                    "id": 6,
-                    "userId": 55,
-                    "title": "iss23440 : Запилить крутой сайт за 2 часа",
-                    "start": "2019-09-19 12:00:00",
-                    "end": "2019-09-19 12:30:00",
-                    "timeChecked": 0,
-                    "zone": "productive",
-                    "taskId": 23443,
-                    "date": "17.09.2019",
-                    "projectName": "onlineconvertfree.com"
-                });
-                setTimeout(() => {
-                    this.setState({items: stateItems, lol: 'fdf'})
-                }, 2000)
-
-            })
+            this.setState({items: result.items});
         });
     }
 
     state = {
-        items: []
+        items: [],
+        apiCollection: CalendarApiDistributor.getInstance()
     };
 
   render() {
@@ -64,13 +46,64 @@ const App = observer(class AppClass extends Component {
       <div className="App">
           <ControlPanel filterParams={ControlPanelParams}/>
               <appUi.Provider value={{modal: ModalStatus}}>
-                  <CalendarController
-                      planItems={this.state.items}
-                      daysCount={ControlPanelParams.days}
-                      addControl={(calendar) => <div/>}
-                      removeControl={(calendar) => <div/>}
-                      editControl={(calendar) => <div/>}
-                  />
+                  <div className={'flex'}>
+                      <div className={'flex-container'}>
+                          <CalendarController
+                              planItems={this.state.items}
+                              daysCount={ControlPanelParams.days}
+                              calendarName={'productive_dev1'}
+                              hours={5}
+                              showHeader
+                          />
+                      </div>
+                      <div className={'flex-container'}>
+                          <CalendarController
+                              planItems={this.state.items}
+                              daysCount={ControlPanelParams.days}
+                              calendarName={'productive_dev2'}
+                              hours={5}
+                              showHeader
+                          />
+                      </div>
+                  </div>
+                  <h3>Оценки</h3>
+                  <div className={'flex'}>
+                      <div className={'flex-container'}>
+                          <CalendarController
+                              planItems={this.state.items}
+                              daysCount={ControlPanelParams.days}
+                              calendarName={'estimate_dev1'}
+                              hours={2}
+                          />
+                      </div>
+                      <div className={'flex-container'}>
+                          <CalendarController
+                              planItems={this.state.items}
+                              daysCount={ControlPanelParams.days}
+                              calendarName={'estimate_dev2'}
+                              hours={2}
+                          />
+                      </div>
+                  </div>
+                  <h3>Тех.долг</h3>
+                  <div className={'flex'}>
+                      <div className={'flex-container'}>
+                          <CalendarController
+                              planItems={this.state.items}
+                              daysCount={ControlPanelParams.days}
+                              calendarName={'techrent_dev1'}
+                              hours={2}
+                          />
+                      </div>
+                      <div className={'flex-container'}>
+                          <CalendarController
+                              planItems={this.state.items}
+                              daysCount={ControlPanelParams.days}
+                              calendarName={'techrent_dev2'}
+                              hours={2}
+                          />
+                      </div>
+                  </div>
               </appUi.Provider>
           <ModalWindow status={ModalStatus}>
               <CreatePlanItem
