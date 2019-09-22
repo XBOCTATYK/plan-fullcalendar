@@ -28,8 +28,9 @@
 }
 
 .flex-container {
-  display: inline-block;
-  width: 49.7%;
+  display: block;
+  /*width: 49.7%;*/
+  flex-shrink: 1;
 }
 
 @keyframes App-logo-spin {
