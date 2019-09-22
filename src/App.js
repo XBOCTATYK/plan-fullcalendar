@@ -27,6 +27,7 @@ const App = observer(class AppClass extends Component {
         Events.getAll(this.props.controlPanelParams.user, 20).then((result) => {
             this.setState({items: result.items}, () => {
                 window.dispatchEvent(new Event('resize'));
+                this.forceUpdate()
             });
         });
 
@@ -40,7 +41,6 @@ const App = observer(class AppClass extends Component {
     };
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log('fdfs')
 
         const {controlPanelParams} = this.props;
         if (controlPanelParams.splitCalendar && !this.state.items2.length) {
