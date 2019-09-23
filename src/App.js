@@ -47,7 +47,7 @@ const App = observer(class AppClass extends Component {
             const Events = new EventModel();
 
             Events.getAll(controlPanelParams.user2, 20).then((result) => {
-                this.setState({items2: result.items, splitMode: true}, () => {
+                this.setState({items2: result.items}, () => {
                     //window.dispatchEvent(new Event('resize'));
                 });
             });
@@ -55,32 +55,34 @@ const App = observer(class AppClass extends Component {
     }
 
     render() {
+    const {controlPanelParams} = this.props;
+
     return (
       <div className="App">
-          <ControlPanel filterParams={this.props.controlPanelParams}/>
+          <ControlPanel filterParams={controlPanelParams}/>
               <appUi.Provider value={{modal: ModalStatus}}>
                   <div className="flex">
                   {
                       this.state.items.length &&
                           <div className="flex-container">
                               <EventsOperationsLogic
-                                  userId={this.props.controlPanelParams.user}
+                                  userId={controlPanelParams.user}
                                   zones={zoneList}
                                   items={this.state.items}
-                                  daysCount={this.props.controlPanelParams.days}
+                                  daysCount={+controlPanelParams.days}
                                   modalControl={ModalStatus}
                               />
                           </div>
                   }
 
                   {
-                      (this.state.items2.length && this.props.controlPanelParams.splitCalendar) &&
+                      (controlPanelParams.splitCalendar) &&
                       <div className="flex-container">
                           <EventsOperationsLogic
-                              userId={this.props.controlPanelParams.user2}
+                              userId={controlPanelParams.user2}
                               zones={zoneList}
                               items={this.state.items2}
-                              daysCount={this.props.controlPanelParams.days}
+                              daysCount={+controlPanelParams.days}
                               modalControl={ModalStatus}
                           />
                       </div>
