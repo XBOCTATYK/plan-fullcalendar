@@ -1,0 +1,26 @@
+{
+    "data": [
+        {
+            "ID": 1,
+            "label": "Letovo.ru"
+        },
+        {
+            "ID": 2,
+            "label": "onlineconvertfree"
+        },
+        {
+            "ID": 3,
+            "label": "Legion"
+        },
+        {
+            "ID": 4,
+            "label": "Lukoil"
+        },
+        {
+            "ID": 5,
+            "label": "Smash"
+        }
+    ],
+    "errors": [],
+    "status": "success"
+}
